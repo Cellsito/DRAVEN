@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f5053b07165fcc549b3e2b26d5d3d165
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 82048
+  packageName: Third Person Controller - Basic Locomotion FREE
+  packageVersion: 2.0
+  assetPath: Assets/Invector-3rdPersonController_LITE/Scripts/Camera/Editor/vThirdPersonCameraEditor.cs
+  uploadId: 347827
