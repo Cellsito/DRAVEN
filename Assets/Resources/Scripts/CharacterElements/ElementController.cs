@@ -4,6 +4,8 @@ using UnityEngine;
 public class ElementController : MonoBehaviour
 {
 
+    public int medallionCounter = 0;
+
     public bool windFound;
     public bool windActive;
 

@@ -4,19 +4,23 @@ public class MedallionCounter : MonoBehaviour
 {
 
     public GameObject wall;
-    public int counter;
+    public GameObject player;
+    private ElementController controller;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        counter = 0;
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (counter >= 4)
+        controller = player.GetComponent<ElementController>();
+        Debug.Log(controller.ToString());
+        if (controller.medallionCounter >= 4)
         {
             if (wall != null)
             {
@@ -32,7 +36,7 @@ public class MedallionCounter : MonoBehaviour
     {
         if (collision.gameObject.tag == "Medallion")
         {
-            counter++;
+            controller.medallionCounter++;
             Destroy(collision.gameObject);
             
         }
