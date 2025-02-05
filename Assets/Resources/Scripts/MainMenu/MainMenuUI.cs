@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 public class MainMenuUI : MonoBehaviour
 {
     string UITag;
+    public AudioSource audioSource;
+    public AudioClip hoverClip;
+    public AudioClip pressedClip;
     public GameObject start;
     public GameObject easy;
     public GameObject normal;
@@ -16,6 +19,7 @@ public class MainMenuUI : MonoBehaviour
     private Vector3 initialScale;
     private RaycastResult curRaysastResult;
     public Difficulty difficulty;
+    private string overUI;
     
     private void Start()
     {
@@ -27,6 +31,12 @@ public class MainMenuUI : MonoBehaviour
     {
         if (IsMouseOn("StartUI"))
         {
+            if (overUI != "StartUI")
+            {
+                audioSource.clip = hoverClip;
+                audioSource.Play();
+                overUI = "StartUI";
+            }
             IncreaseScale(true, start);
             if (Input.GetMouseButtonDown(0)) {
                 start.SetActive(false);
@@ -38,34 +48,67 @@ public class MainMenuUI : MonoBehaviour
         } else if (IsMouseOn("EasyUI"))
         {
             IncreaseScale(true, easy);
+            if (overUI != "EasyUI")
+            {
+                audioSource.clip = hoverClip;
+                audioSource.Play();
+                overUI = "EasyUI";
+            }
             if (Input.GetMouseButtonDown(0))
             {
+                audioSource.clip = pressedClip;
+                audioSource.Play();
                 SceneManager.LoadScene("mapa");
                 difficulty.difficultyID = 1;
             }
             
         } else if (IsMouseOn("NormalUI"))
         {
+            if (overUI != "NormalUI")
+            {
+                audioSource.clip = hoverClip;
+                audioSource.Play();
+                overUI = "NormalUI";
+            }
             IncreaseScale(true, normal);
             if (Input.GetMouseButtonDown(0))
             {
+                audioSource.clip = pressedClip;
+                audioSource.Play();
                 SceneManager.LoadScene("mapa");
                 difficulty.difficultyID = 2;
             }
 
         } else if (IsMouseOn("HardUI"))
         {
+            if (overUI != "HardUI")
+            {
+                audioSource.clip = hoverClip;
+                audioSource.Play();
+                overUI = "HardUI";
+            }
             IncreaseScale(true, hard);
             if (Input.GetMouseButtonDown(0))
             {
+                audioSource.clip = pressedClip;
+                audioSource.Play();
                 SceneManager.LoadScene("mapa");
                 difficulty.difficultyID = 3;
             }
         } else if (IsMouseOn("Back"))
         {
             IncreaseScale(true, back);
+            if (overUI != "Back")
+            {
+                audioSource.clip = hoverClip;
+                audioSource.Play();
+                overUI = "Back";
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
+                audioSource.clip = pressedClip;
+                audioSource.Play();
                 easy.SetActive(false);
                 normal.SetActive(false);
                 hard.SetActive(false);
@@ -76,12 +119,12 @@ public class MainMenuUI : MonoBehaviour
         
         else
         {
+            overUI = null;
             IncreaseScale(false, start);
             IncreaseScale(false, easy);
             IncreaseScale(false, normal);
             IncreaseScale(false, hard);
             IncreaseScale(false, back);
-            Debug.Log("Desativado");
         }
 
 
@@ -93,7 +136,7 @@ public class MainMenuUI : MonoBehaviour
     public bool IsMouseOn(string tag)
     {
         UITag = tag;
-        Debug.Log(tag);
+        
         return IsPointerOverUIElement(GetEventSystemRaycastResults());
     }
 
@@ -132,6 +175,7 @@ public class MainMenuUI : MonoBehaviour
         if (go != null)
         {
             go.transform.localScale = finalScale;
+           
         }
     }
 }

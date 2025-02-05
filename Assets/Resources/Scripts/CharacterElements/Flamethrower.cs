@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Invector.vCharacterController;
 using Unity.VisualScripting;
@@ -11,7 +12,8 @@ public class Flamethrower : MonoBehaviour
     public Transform gunTip;
     public LayerMask whatIsFlameble;
     public LineRenderer lr;
-
+    public AudioSource audioSource;
+    public AudioClip fireSound;
 
     [Header("Flamethrower")]
     public float maxFlameDistance;
@@ -89,6 +91,8 @@ public class Flamethrower : MonoBehaviour
         {
             go.GetComponent<Rigidbody>().useGravity = true;
             go.GetComponent<Renderer>().material = flameMaterial;
+            audioSource.clip = fireSound;
+            audioSource.Play();
         }
 
         Invoke(nameof(StopFlame), flameDelayTime);
@@ -121,6 +125,7 @@ public class Flamethrower : MonoBehaviour
     private void DestroyObjects()
     {
         if (hitPointGameObject!= null) hitPointGameObject.GetAllChilds().ForEach(GameObject.Destroy);
+
 
     }
 

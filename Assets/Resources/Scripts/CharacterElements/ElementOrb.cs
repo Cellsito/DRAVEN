@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Invector.vCharacterController;
 using NUnit.Framework;
@@ -6,7 +7,8 @@ using UnityEngine.UI;
 
 public class ElementOrb : MonoBehaviour
 {
-
+    public AudioSource audioSource;
+    public AudioClip powerUpSound;
     private GameObject player;
     private GameObject playerGO;
     private ElementController controller;
@@ -18,7 +20,6 @@ public class ElementOrb : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Players");
         controller = player.GetComponent<ElementController>();
         
-
     }
 
     // Update is called once per frame
@@ -52,6 +53,7 @@ public class ElementOrb : MonoBehaviour
             Invoke(nameof(TriggerAnim), 0.2f);
             controller.grappleFound = true;
             
+
         } else if(collision.gameObject.tag == "Fire")
         {
             controller.waterActive = false;
@@ -61,7 +63,7 @@ public class ElementOrb : MonoBehaviour
             player.GetComponent<ElementController>().elementSlot = 3;
             Invoke(nameof(TriggerAnim), 0.2f);
             controller.fireFound = true;
-            
+
         } else if (collision.gameObject.tag == "Ice")
         {
             controller.windActive = false;
@@ -79,5 +81,7 @@ public class ElementOrb : MonoBehaviour
     {
         playerGO = GameObject.FindGameObjectWithTag("Player");
         playerGO.GetComponent<Animator>().SetTrigger("Power");
+        player.GetComponent<AudioSource>().clip = powerUpSound;
+        player.GetComponent<AudioSource>().Play();
     }
 }

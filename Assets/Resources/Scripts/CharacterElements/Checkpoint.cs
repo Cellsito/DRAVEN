@@ -33,8 +33,8 @@ public class Checkpoint : MonoBehaviour
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
         
-
         cpDistanceFromPlayer = Vector3.Distance(cpPosition.transform.position, player.transform.position);
 
         if (cpDistanceFromPlayer < cpDistanceToInteract)
@@ -67,6 +67,7 @@ public class Checkpoint : MonoBehaviour
             {
 
                 ActivateCheckPoint();
+                GetComponent<AudioSource>().Play();
 
                 Debug.Log("Checkpoint Salvo");
 

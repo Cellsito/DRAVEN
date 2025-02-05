@@ -6,6 +6,8 @@ public class MedallionCounter : MonoBehaviour
     public GameObject wall;
     public GameObject player;
     private ElementController controller;
+    public AudioSource audioSource;
+    public AudioClip clip;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +21,6 @@ public class MedallionCounter : MonoBehaviour
     void Update()
     {
         controller = player.GetComponent<ElementController>();
-        Debug.Log(controller.ToString());
         if (controller.medallionCounter >= 4)
         {
             if (wall != null)
@@ -38,6 +39,8 @@ public class MedallionCounter : MonoBehaviour
         {
             controller.medallionCounter++;
             Destroy(collision.gameObject);
+            audioSource.clip = clip;
+            audioSource.Play();
             
         }
     }

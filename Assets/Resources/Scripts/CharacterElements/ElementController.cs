@@ -21,6 +21,8 @@ public class ElementController : MonoBehaviour
     public int elementSlot = 1;
 
     private ChangeElement changeElement;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +36,9 @@ public class ElementController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+
+            audioSource.clip = audioClip;
+            audioSource.Play();
             windActive = false;
             fireActive = false;
             waterActive = false;
@@ -47,6 +52,8 @@ public class ElementController : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
+            audioSource.clip = audioClip;
+            audioSource.Play();
             windActive = false;
             fireActive = false;
             waterActive = false;

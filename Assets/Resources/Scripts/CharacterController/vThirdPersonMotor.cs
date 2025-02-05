@@ -71,7 +71,7 @@ namespace Invector.vCharacterController
         private Grappling grapple;
 
         // movement bools
-        internal bool isJumping;
+        public bool isJumping;
         internal bool isStrafing
         {
             get
@@ -305,8 +305,9 @@ namespace Invector.vCharacterController
 
         #endregion
 
-        #region Ground Check                
-
+        #region Ground Check      
+        
+        
         protected virtual void CheckGround()
         {
             CheckGroundDistance();
@@ -324,6 +325,8 @@ namespace Invector.vCharacterController
             {
                 if (groundDistance >= groundMaxDistance)
                 {
+                    gameObject.GetComponent<AudioSource>().clip = gameObject.GetComponent<vThirdPersonController>().jumpLand;
+                    gameObject.GetComponent<AudioSource>().Play();
                     // set IsGrounded to false 
                     isGrounded = false;
                     // check vertical velocity

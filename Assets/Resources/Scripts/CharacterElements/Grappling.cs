@@ -30,6 +30,8 @@ public class Grappling : MonoBehaviour
     private ElementController elcontroller;
     private GameObject players;
     GameObject player;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     private int[] elements;
     private int elementSlot;
@@ -69,6 +71,7 @@ public class Grappling : MonoBehaviour
         if (grapplingCdTimer > 0 || !elcontroller.grappleFound || !elcontroller.grappleActive) return;
 
         player.GetComponent<Animator>().SetTrigger("Slash");
+        
         
 
         RaycastHit hit;
@@ -118,6 +121,8 @@ public class Grappling : MonoBehaviour
         grappling = true;
         lr.enabled = true;
         lr.SetPosition(1, grapplePoint);
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
 }

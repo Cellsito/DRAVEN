@@ -112,11 +112,16 @@ namespace Invector.vCharacterController
             isStrafing = !isStrafing;
         }
 
+        public AudioSource audioSource;
+        public AudioClip jumpClip;
+        public AudioClip jumpLand;
         public virtual void Jump()
         {
             // trigger jump behaviour
             jumpCounter = jumpTimer;
             isJumping = true;
+            audioSource.clip = jumpClip;
+            audioSource.Play();
 
             // trigger jump animations
             if (input.sqrMagnitude < 0.1f)
@@ -129,12 +134,16 @@ namespace Invector.vCharacterController
         Rigidbody body;
         GameObject camGO;
         public GameObject aim;
+        public GameObject playersGO;
+        private PlayerController pController;
+       
         void Start()
         {
 
             motor = GetComponent<vThirdPersonMotor>();
             body = GetComponent<Rigidbody>();
             camGO = GameObject.FindGameObjectWithTag("MainCamera");
+            pController = playersGO.GetComponent<PlayerController>();
 
             
         }
@@ -145,6 +154,7 @@ namespace Invector.vCharacterController
             {
                 this.gameObject.transform.position = Checkpoint.GetActiveCheckPointPosition();
                 body.isKinematic = true;
+                pController.lifes -= 1;
 
                 Invoke(nameof(EnableMotor), 0.1f);
             }
@@ -161,18 +171,23 @@ namespace Invector.vCharacterController
                 {
                     aim.SetActive(true);
                 }
-                
-                
-                
-            } else
+
+
+
+            }
+            else
             {
                 camGO.GetComponent<vThirdPersonCamera>().rightOffset = 0.1f;
                 if (aim.activeSelf)
                 {
                     aim.SetActive(false);
                 }
-                
+
+
+
             }
+
+            
         }
         private void EnableMotor()
         {

@@ -23,6 +23,10 @@ public class AirElement : MonoBehaviour
         if (elcontroller.windActive) 
         {
             controller.jumpHeight = 8f;
+            controller.freeSpeed.walkSpeed = 4f;
+            controller.freeSpeed.runningSpeed = 4f;
+            controller.freeSpeed.sprintSpeed = 8f;
+            
         } else
         {
             controller.jumpHeight = 2.5f;
